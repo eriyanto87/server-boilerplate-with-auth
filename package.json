@@ -1,11 +1,14 @@
 {
-  "name": "backend-project-boilerplate-with-authentication",
+  "name": "server-project-boilerplate-with-authentication",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
     "test": "mocha --require test/setup.js",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:test": "env NODE_ENV=test npm run migrate",
+    "migrate:production": "heroku run npm run migrate",
     "dev": "nodemon src/server.js",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
@@ -14,11 +17,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.1.1",
-    "morgan": "^1.10.0"
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.16",
+    "morgan": "^1.10.0",
+    "pg": "^8.5.1",
+    "postgrator-cli": "^3.2.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

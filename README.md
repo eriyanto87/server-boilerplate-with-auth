@@ -1,25 +1,45 @@
-# Express Boilerplate!
+# API Boilerplate with User Authentication
 
-This is a boilerplate project used for starting new projects!
+## Local dev setup
 
-## Set up
-
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
-
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
+1. Clone the respository to your local machine `git clone BOILERPLATE URL PROJECT-NAME`
+2. `cd` into cloned repo
 3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+4. `mv example.env .env`
+   `createdb -U user project-name`
+   `createdb -U user project-name-test`
+   If user has a password be sure to set it in .env for all appropriate fields. Or if using a different user, update appropriately.
+5. npm install
+6. npm run migrate
+7. `env DATABASE_URL=project-name-test npm run migrate`
+   And npm test should work at this point
+8. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "server-project-boilerplate-with-authentication",`
 
-## Scripts
+Configuring Postgres
+For tests involving time to run properly, configure your Postgres database to run in the UTC timezone.
 
-Start the application `npm start`
+Locate the postgresql.conf file for your Postgres installation.
+E.g. for an OS X, Homebrew install: /usr/local/var/postgres/postgresql.conf
+E.g. on Windows, maybe: C:\Program Files\PostgreSQL\11.2\data\postgresql.conf
+E.g on Ubuntu 18.04 probably: '/etc/postgresql/10/main/postgresql.conf'
+Find the timezone line and set it to UTC:
 
-Start nodemon for the application `npm run dev`
+# - Locale and Formatting -
 
-Run the tests `npm test`
+datestyle = 'iso, mdy'
+#intervalstyle = 'postgres'
+timezone = 'UTC'
+#timezone_abbreviations = 'Default' # Select the set of available time zone
+Scripts
+Start the application npm start
+
+Start nodemon for the application npm run dev
+
+Run the tests mode npm test
+
+Run the migrations up npm run migrate
+
+Run the migrations down npm run migrate -- 0
 
 ## Deploying
 
